@@ -2345,11 +2345,9 @@ body::after { mix-blend-mode: multiply; opacity: .22 !important;
 
 /* ---- contacts: Maxim (Telegram + Russian phone) on the Russian version only; RU = 3 cards for Stepan over 2 for Maxim ---- */
 :root:is([lang="en"], [lang="hy"]) .ru-only { display: none !important; }
-:root:not([lang="en"]):not([lang="hy"]) .ct__list { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-:root:not([lang="en"]):not([lang="hy"]) .ct__list > li { grid-column: span 2; }
-:root:not([lang="en"]):not([lang="hy"]) .ct__list > li.ru-only { grid-column: span 3; }
+:root:not([lang="en"]):not([lang="hy"]) .ct__list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 :root:is([lang="en"], [lang="hy"]) .ct__list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-@media (max-width: 1100px) { :root .ct__list { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } :root .ct__list > li, :root .ct__list > li.ru-only { grid-column: auto !important; } :root:not([lang="en"]):not([lang="hy"]) .ct__list > li:first-child { grid-column: 1 / -1 !important; } }
+@media (max-width: 1100px) { :root .ct__list { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } :root .ct__list > li, :root .ct__list > li.ru-only { grid-column: auto !important; } }
 @media (max-width: 560px) { :root .ct__list { grid-template-columns: minmax(0, 1fr) !important; } :root .ct__list > li { grid-column: auto !important; } }
 
 /* ---- graphic design rows: draggable / swipeable ---- */
@@ -2982,7 +2980,6 @@ body::after { mix-blend-mode: multiply; opacity: .22 !important;
         <li class="ig-only"><a class="ct__card" href="https://www.instagram.com/misharin_ux_ui/" target="_blank" rel="noopener noreferrer"><span class="ct__ch">Instagram</span><b>@misharin_ux_ui</b><span class="ct__who" data-i18n="ctTg">Степан, дизайнер</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></span></a></li>
         <li><div class="ct__card"><span class="ct__ch" data-i18n="ctMailK">Почта</span><a class="ct__mail" href="mailto:designermisharin@gmail.com">designermisharin@gmail.com</a><button type="button" class="ct__copy" data-copy-email data-i18n="copy">Скопировать</button></div></li>
         <li class="ru-only"><a class="ct__card" href="https://t.me/Maxim_DMar" target="_blank" rel="noopener noreferrer"><span class="ct__ch">Telegram</span><b>@Maxim_DMar</b><span class="ct__who" data-i18n="ctMgr">Максим, менеджер проекта</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></span></a></li>
-        <li class="ru-only"><a class="ct__card" href="tel:+79961763635"><span class="ct__ch" data-i18n="ctRuK">Телефон · Россия</span><b>+7 996 176-36-35</b><span class="ct__who" data-i18n="ctMgr">Максим, менеджер проекта</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></span></a></li>
       </ul>
     </div>
   </section>
@@ -3012,7 +3009,6 @@ body::after { mix-blend-mode: multiply; opacity: .22 !important;
           <li><a href="https://t.me/misharin_ux_ui" target="_blank" rel="noopener noreferrer">Telegram <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></li>
           <li class="ig-only"><a href="https://www.instagram.com/misharin_ux_ui/" target="_blank" rel="noopener noreferrer">Instagram <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></li>
           <li class="ru-only"><a href="https://t.me/Maxim_DMar" target="_blank" rel="noopener noreferrer"><span data-i18n="fxMx">Максим</span> · Telegram</a></li>
-          <li class="ru-only"><a href="tel:+79961763635"><span data-i18n="fxMx">Максим</span> · +7 996 176-36-35</a></li>
           <li><a href="https://wa.me/37477827708" data-wa target="_blank" rel="noopener noreferrer">WhatsApp <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></li>
         </ul>
       </div>

@@ -2354,6 +2354,49 @@ body::after { mix-blend-mode: multiply; opacity: .22 !important;
 .gd__row { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
 .gd__row.is-drag { cursor: grabbing; }
 .gd__row .gd__it { cursor: zoom-in; }
+
+/* ---- Armenia offer, variant A: back on the paper, an apricot glass sphere on two orbits, the flag as three thin strokes ---- */
+.np.ao { background: #F5EFE9 !important; --bg: #F5EFE9; --fg: #121110; --muted: #6E665F; --line: rgba(18, 17, 16, .12); color: #121110; border-top: 1px solid rgba(18, 17, 16, .08); }
+.ao__glow { display: none !important; }
+.np.ao { color: #121110 !important; }
+.np.ao .np__price { background: rgba(18, 17, 16, .05) !important; }
+.np.ao .np__sw { background: rgba(18, 17, 16, .07) !important; }
+.np.ao .btn--ghost { color: #121110 !important; }
+.np.ao .btn--ghost, .np.ao .chip, .np.ao .chip--dark, .np.ao .dock__opt, .np.ao .dk__go, .np.ao .dk__arw, .np.ao .pf__arrow, .np.ao .ct__copy, .np.ao .np__tab, .np.ao .ns__chip { color: #121110 !important; }
+.np.ao .np__am { color: rgba(18, 17, 16, .8) !important; border: 1px solid rgba(18, 17, 16, .16) !important; background: rgba(18, 17, 16, .04) !important; }
+.np.ao .nj { background: rgba(18, 17, 16, .03) !important; border-color: rgba(18, 17, 16, .12) !important; }
+.np.ao .ao__title { color: #121110 !important; }
+.np.ao .ao__sub { color: #121110 !important; }
+.np.ao .ao__map { color: rgba(18, 17, 16, .62) !important; }
+.np.ao .ao__b { border-top: 1px solid rgba(18, 17, 16, .14) !important; }
+.np.ao .ao__h { color: #121110 !important; }
+.np.ao .ao__hint { color: rgba(18, 17, 16, .55) !important; }
+.np.ao .ao__w { color: rgba(18, 17, 16, .8) !important; background: rgba(18, 17, 16, .04) !important; border: 1px solid rgba(18, 17, 16, .14) !important; }
+.np.ao .ao__w:hover { border-color: rgba(18, 17, 16, .4) !important; color: #121110 !important; }
+.np.ao .ao__card { background: rgba(18, 17, 16, .05) !important; border: 1px solid rgba(18, 17, 16, .12) !important; }
+.np.ao .ao__ft { color: #121110 !important; }
+.np.ao .ao__bar { background: rgba(18, 17, 16, .12) !important; }
+.np.ao .ao__title > span:first-child { color: #121110 !important; }
+.np.ao .ao__title > .ns__title-2 { color: #FE530B !important; }
+.ao__art { position: absolute; z-index: 0; top: clamp(40px, 6vw, 96px); right: max(16px, calc((100vw - 1440px) / 2 + 3vw)); width: clamp(300px, 36vw, 560px); aspect-ratio: 1.25; pointer-events: none; }
+.ao__sph { position: absolute; left: 50%; top: 46%; width: 54%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
+  background: radial-gradient(circle at 34% 28%, #FFF4DA 0 3%, #FFD27A 14%, #FFB21A 34%, #FE7A1A 58%, #E04A08 78%, #9E2C02 100%);
+  box-shadow: 0 40px 80px -30px rgba(254, 83, 11, .55), inset -18px -24px 50px rgba(120, 30, 0, .25); animation: aoBob 7s ease-in-out infinite alternate; }
+.ao__orb { position: absolute; inset: 14% -6%; border: 1px solid rgba(18, 17, 16, .14); border-radius: 50%; rotate: -12deg; }
+.ao__orb--2 { inset: 26% 12%; }
+.ao__tri { position: absolute; right: 18%; bottom: 6%; display: flex; gap: 6px; }
+.ao__tri i { width: clamp(28px, 3vw, 44px); height: 3px; }
+.ao__tri i:nth-child(1) { background: #D90012; } .ao__tri i:nth-child(2) { background: #0033A0; } .ao__tri i:nth-child(3) { background: #F2A800; }
+.ao__star { position: absolute; left: 6%; top: 8%; width: 22px; height: 22px; background: #FE530B; clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); animation: aoTw 3.2s ease-in-out infinite; }
+@keyframes aoBob { to { transform: translateY(-14px) rotate(10deg); } }
+@keyframes aoTw { 50% { transform: scale(.6) rotate(45deg); opacity: .6; } }
+.np.ao .ao__card::after { opacity: .9; }
+@media (max-width: 900px) { .ao__art { width: 260px; right: -60px; top: 24px; opacity: .9; } .ao__tri { right: 30%; } }
+@media (max-width: 560px) { .ao__art { width: 170px; right: -64px; top: 0; } .ao__star, .ao__orb--2, .ao__tri { display: none; } }
+.ao__sph, .ao__orb { border-radius: 50% !important; }
+.np.ao .ao__w[aria-pressed="true"] { background: #FE530B !important; border-color: #FE530B !important; color: #fff !important; }
+.np.ao .ns__foot .btn--ghost { border: 1px solid rgba(18, 17, 16, .2) !important; background: rgba(18, 17, 16, .03) !important; }
+@media (prefers-reduced-motion: reduce) { .ao__sph, .ao__star { animation: none; } }
 </style>
 </head>
 <body>
@@ -2853,7 +2896,7 @@ body::after { mix-blend-mode: multiply; opacity: .22 !important;
 
   <!-- no website yet: the first one in two weeks (for businesses that live in Instagram) -->
   <section class="np ao" id="start" aria-labelledby="ns-title">
-    <div class="ao__glow" aria-hidden="true"><i class="g1"></i><i class="g2"></i><i class="g3"></i></div>
+    <div class="ao__art" aria-hidden="true"><i class="ao__orb"></i><i class="ao__orb ao__orb--2"></i><i class="ao__sph"></i><span class="ao__tri"><i></i><i></i><i></i></span><i class="ao__star"></i></div>
     <div class="wrap">
       <div class="ao__head">
         <span class="np__am"><i aria-hidden="true"></i><span data-i18n="aoK">Предложение для Армении</span></span>

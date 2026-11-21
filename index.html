@@ -2397,6 +2397,26 @@ body::after { mix-blend-mode: multiply; opacity: .22 !important;
 .np.ao .ao__w[aria-pressed="true"] { background: #FE530B !important; border-color: #FE530B !important; color: #fff !important; }
 .np.ao .ns__foot .btn--ghost { border: 1px solid rgba(18, 17, 16, .2) !important; background: rgba(18, 17, 16, .03) !important; }
 @media (prefers-reduced-motion: reduce) { .ao__sph, .ao__star { animation: none; } }
+
+/* ---- cleanup before the new concept: no abstract objects, a quiet preloader, a header that stays, no slot badge on phones ---- */
+.abs, .ao__art, .ob__sph, .ob__rings, .marquee__star, .fx__word > i, .ao__card::after, .ao__glow { display: none !important; }
+.ob__stage { height: auto !important; display: block !important; padding-top: clamp(16px, 2vw, 32px); }
+.ob__list { position: static !important; display: grid !important; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid rgba(18, 17, 16, .14); border-left: 1px solid rgba(18, 17, 16, .14); }
+.ob__p { position: static !important; transform: none !important; opacity: 1 !important; display: grid !important; align-content: space-between; gap: 28px; min-height: 140px; padding: 20px !important; white-space: normal !important; font-size: clamp(16px, 1.3vw, 20px) !important; line-height: 1.2 !important; border: 0 !important; border-right: 1px solid rgba(18, 17, 16, .14) !important; border-bottom: 1px solid rgba(18, 17, 16, .14) !important; background: transparent !important; box-shadow: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; transition: background .3s; }
+.ob__p:hover { background: rgba(18, 17, 16, .03) !important; }
+@media (max-width: 1000px) { .ob__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ob__p { min-height: 110px; } }
+@media (max-width: 420px) { .ob__p { font-size: 15px !important; padding: 14px !important; gap: 18px; } }
+.header, .header.is-hidden { transform: none !important; }
+@media (max-width: 760px) { .slot { display: none !important; } }
+.intro { background: #F5EFE9 !important; transform: none !important; filter: none !important; }
+.intro .tc__bars, .intro .tc__grid, .intro .tc__strip, .intro .tc__noise { display: none !important; }
+.intro .tc__disc { width: min(320px, 70vw); aspect-ratio: auto; border-radius: 0 !important; background: none !important; box-shadow: none !important; color: #121110; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 14px 16px; text-align: left; justify-items: stretch; }
+.intro .tc__disc::before, .intro .tc__disc::after { display: none; }
+.intro .tc__name { grid-column: 1; background: none; padding: 0; font: 600 15px/1 var(--font-display); letter-spacing: -.01em; text-transform: none; }
+.intro .tc__count { grid-column: 2; background: none; padding: 0; font: 500 15px/1 var(--font-body); letter-spacing: 0; color: rgba(18, 17, 16, .55); }
+.intro .tc__count small { font-size: 1em; vertical-align: baseline; }
+.tc__line { grid-column: 1 / -1; grid-row: 2; height: 1px; background: rgba(18, 17, 16, .12); overflow: hidden; }
+.tc__line i { display: block; height: 100%; background: #121110; transform: scaleX(0); transform-origin: 0 50%; }
 </style>
 </head>
 <body>
@@ -2408,7 +2428,7 @@ body::after { mix-blend-mode: multiply; opacity: .22 !important;
   <div class="tc__bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="tc__grid"></div>
   <div class="tc__strip"></div>
-  <div class="tc__disc"><span class="tc__name" data-i18n="intro">Мишарин · эфир</span><span class="tc__count"><span data-intro-count>0</span><small>%</small></span></div>
+  <div class="tc__disc"><span class="tc__name">Мишарин</span><span class="tc__line"><i></i></span><span class="tc__count"><span data-intro-count>0</span><small>%</small></span></div>
   <div class="tc__noise"></div>
 </div>
 
@@ -3507,9 +3527,21 @@ body::after { mix-blend-mode: multiply; opacity: .22 !important;
     const y = scrollY;
     header.classList.toggle('is-scrolled', y > 20);
     // hides while reading down, comes back as soon as the page goes up a little, always shown near the top
-    if (Math.abs(y - lastY) > 6) { header.classList.toggle('is-hidden', y > lastY && y > 160 && !root.classList.contains('menu-open')); lastY = y; }
+    if (Math.abs(y - lastY) > 6) { header.classList.remove('is-hidden'); lastY = y; }
     if (y < 160) header.classList.remove('is-hidden');
   }, { passive: true });
+
+  /* ---------- touch sliders: once a swipe reads as sideways, the page stops scrolling for the rest of that gesture ---------- */
+  document.querySelectorAll('.pf__wheel, .dk__deck, .sd__stage, .pk__stack, .gd__row').forEach(el => {
+    let sx = 0, sy = 0, lock = '';
+    el.addEventListener('touchstart', e => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; lock = ''; }, { passive: true });
+    el.addEventListener('touchmove', e => {
+      if (e.touches.length > 1) return;
+      const t = e.touches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+      if (!lock && Math.abs(dx) + Math.abs(dy) > 5) lock = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      if (lock === 'x' && e.cancelable) e.preventDefault();
+    }, { passive: false });
+  });
 
   /* ---------- intro curtain ---------- */
   const introEl = document.querySelector('.intro');
@@ -3523,13 +3555,8 @@ body::after { mix-blend-mode: multiply; opacity: .22 !important;
     const load = { v: 0 }, jit = { k: 0 };
     gsap.timeline({ onComplete: () => introEl.remove() })
       .to(load, { v: 100, duration: 0.6, ease: 'power2.inOut', onUpdate: () => { countEl.textContent = Math.round(load.v); } }, 0)
-      .set(noise, { opacity: .9 }, 0.62)
-      .to(jit, { k: 1, duration: 0.22, ease: 'none', onUpdate: () => {
-        const k = jit.k;
-        introEl.style.transform = `translateX(${((Math.random() - .5) * 26 * (1 - k * .5)).toFixed(1)}px) skewX(${((Math.random() - .5) * 8).toFixed(2)}deg)`;
-        introEl.style.filter = `contrast(${(1 + k * 2).toFixed(2)}) brightness(${(1 + k * 1.2).toFixed(2)})`;
-      } }, 0.62)
-      .to(introEl, { autoAlpha: 0, duration: 0.12, ease: 'none' }, 0.84);
+      .to(introEl.querySelector('.tc__line i'), { scaleX: 1, duration: 0.6, ease: 'power2.inOut' }, 0)
+      .to(introEl, { autoAlpha: 0, duration: 0.3, ease: 'power1.out' }, 0.7);
   }
 
   /* ---------- hero: liquid reveal (WebGL background + wireframe portrait) ---------- */
@@ -4046,7 +4073,7 @@ body::after { mix-blend-mode: multiply; opacity: .22 !important;
       head(); addEventListener('langchange', () => setTimeout(head));
       /* orbit: four points on the inner ellipse, six on the outer one, turning in opposite directions;
          the near half of each ellipse passes in front of the sphere, the far half behind it */
-      const r1 = ck.querySelector('.ob__r1'), r2 = ck.querySelector('.ob__r2'), mq = matchMedia('(max-width: 700px)');
+      const r1 = ck.querySelector('.ob__r1'), r2 = ck.querySelector('.ob__r2'), mq = { matches: true }; /* the orbit is retired: the ten points sit in a plain grid at every width */
       let W = 0, H = 0, run = false, raf = 0, t0 = performance.now(), off = 0;
       const size = () => { W = stage.clientWidth; H = stage.clientHeight;
         [[r1, .27, .2], [r2, .43, .35]].forEach(([e, kx, ky]) => { e.setAttribute('cx', W / 2); e.setAttribute('cy', H / 2); e.setAttribute('rx', W * kx); e.setAttribute('ry', H * ky); }); };
@@ -4065,7 +4092,7 @@ body::after { mix-blend-mode: multiply; opacity: .22 !important;
       size(); place(performance.now());
       new ResizeObserver(() => { size(); place(performance.now()); }).observe(stage);
       if (motion) new IntersectionObserver(es => es.forEach(e => { run = e.isIntersecting && !mq.matches; cancelAnimationFrame(raf); if (run) raf = requestAnimationFrame(loop); })).observe(stage);
-      if (motion) gsap.fromTo(ck.querySelector('.ob__sph'), { yPercent: 18, scale: .86 }, { yPercent: -10, scale: 1.04, ease: 'none', scrollTrigger: { trigger: ck, start: 'top bottom', end: 'bottom top', scrub: .6 } });
+      if (false) gsap.fromTo(ck.querySelector('.ob__sph'), { yPercent: 18, scale: .86 }, { yPercent: -10, scale: 1.04, ease: 'none', scrollTrigger: { trigger: ck, start: 'top bottom', end: 'bottom top', scrub: .6 } });
     }
   }
 
